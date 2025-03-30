@@ -1,14 +1,13 @@
 from django.contrib import admin
 from django.urls import path
-from .views import home, search_page
-from myapp import views  # 🔥 Thêm dòng này để import views
-from .views import book_list
-from .views import login_view 
+from .import views
 
 urlpatterns = [
-    path('', home, name='home'),
-    path('search/', search_page, name='search'),
-    path('book/', book_list, name='book'),
-    path('admin/', admin.site.urls),
-    path('login/', login_view, name='login'),
+    path('', views.home, name='home'),
+    path('search/', views.search_page, name='search'),
+    path('book/', views.book_list, name='book'),
+    path('login/', views.login_view, name='login'),
+    path('register/', views.register_view, name='register'),
+    path('logout/', views.logout_view, name='logout'),
+     path('book/<int:book_id>/', views.book_detail, name='book_detail'),
 ] 

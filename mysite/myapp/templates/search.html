@@ -1,3 +1,4 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -78,30 +79,38 @@
         </div>
       </div> -->
 
-      <div class="search-results">
-        <div><h4>Search Results</h4></div>
-        <div class="result-list">
-          <div class="result-item">
-            <img src="placeholder.png" alt="Document Cover" />
-            <div class="result-info">
-              <h4>tên sách</h4>
-              <p><strong>Tác giả:</strong></p>
-              <p>-</p>
-            </div>
-          </div>
-          <div class="result-item">
-            <img src="placeholder.png" alt="Document Cover" />
-            <div class="result-info">
-              <h4>tên sách</h4>
-              <p>
-                <strong>Tác giả:</strong>
-              </p>
-            </div>
-          </div>
-          <!-- Add more result items as needed -->
-        </div>
-      </div>
+       <div class="search-results">
+        {% if query %}
+            <h4>Kết quả tìm kiếm cho "{{ query }}"</h4>
+            
+            {% if books %}
+                <div class="result-list">
+                    {% for book in books %}
+                    <div class="result-item">
+                        {% if book.image %}
+                            <img src="{{ book.image.url }}" alt="Bìa sách {{ book.title }}">
+                        {% else %}
+                            <img src="{% static 'images/placeholder.png' %}" alt="Không có ảnh bìa">
+                        {% endif %}
+                        <div class="result-info">
+                            <h4><a href="{% url 'book_detail' book.id %}">{{ book.title }}</a></h4>
+                            <p><strong>Tác giả:</strong> {{ book.author }}</p>
+                            <p><strong>Nhà xuất bản:</strong> {{ book.publisher }}</p>
+                            {% if book.collection %}
+                                <p><strong>Bộ sưu tập:</strong> {{ book.collection }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>Không tìm thấy sách phù hợp</p>
+            {% endif %}
+        {% else %}
+            <p>Vui lòng nhập từ khóa tìm kiếm</p>
+        {% endif %}
     </div>
+
  <!-- Footer -->
  <div class="container">
     <div class="row">
@@ -156,13 +165,47 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
-    <ul>
-    {% for book in books %}
-        <li>
-            <a href="{% url 'book_detail' book.id %}"><h3>{{ book.title }}</h3></a>
-            <p>Tác giả: {{ book.author }}</p>
-        </li>
-    {% endfor %}
-    </ul>
+      <style>
+        .search-results {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        
+        .result-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .result-item {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+        }
+        
+        .result-item img {
+            width: 100px;
+            height: 150px;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        
+        .result-info {
+            flex: 1;
+        }
+        
+        .result-info h4 a {
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        
+        .result-info p {
+            margin: 5px 0;
+            color: #555;
+        }
+    </style>
   </body>
 </html>

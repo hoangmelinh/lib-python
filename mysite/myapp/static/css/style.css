@@ -10,7 +10,7 @@ li {
   background-color: #b31e1e;
   color: white;
   font-size: 17px;
-  display: flex;
+  display: flex ;
   align-items: center;
   justify-content: space-between;
   padding: 15px 20px;
@@ -30,6 +30,7 @@ li {
   justify-content: space-between;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 
 .logo {
   display: flex;
@@ -79,14 +80,7 @@ li {
   color: #b31e1e;
   font-size: 18px;
 }
-.search-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  background-color: #f0f0f0;
-  gap: 6px;
-}
+
 
 .timkiem {
   padding: 6px;
@@ -100,17 +94,6 @@ li {
   padding: 6px;
 }
 
-.search-button {
-  background-color: #cc0000;
-  color: white;
-  border: none;
-  padding: 10px;
-  position: sticky;
-  height: 32px;
-  /* line-height: 32px; */
-  display: flex;
-  align-items: center;
-}
 main {
   display: flex;
   padding: 15px;
@@ -227,17 +210,133 @@ div.desc {
 }
 .posts {
   display: flex;
-  width: 100%;
   flex-wrap: wrap;
+  justify-content: center; /* Căn giữa hàng */
   gap: 10px;
-  justify-content: center;
 }
+
 .post-item {
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   width: 400px;
-  display: flex;
+  text-align: center; /* Căn giữa nội dung trong post-item */
 }
+
 .post-item img {
   width: 100%;
   height: 257px;
+}
+
+  .search-section {
+    display: flex;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 5px;
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropbtn {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 150px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content button {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .dropdown-content button:hover {
+    background-color: #ddd;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .timkiem {
+    flex-grow: 1;
+    padding: 5px;
+    margin: 0 5px;
+  }
+
+  .search-button {
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+  }
+
+
+  slider {
+    width: 100%;
+    height: 500px;
+    position: relative;
+    overflow: hidden;
+}
+
+.slider img {
+    width: 100%;
+    height: 500px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;  /* Ẩn ảnh mặc định */
+    transition: opacity 1s ease-in-out;
+}
+
+.slider img.active {
+    opacity: 1;  /* Hiện ảnh có class active */
+}
+
+/* User info style */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-info span {
+  color: white;
+  font-size: 0.9rem;
+}
+
+.logout-btn {
+  background: #dc3545;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.login-btn {
+  background: #0d6efd;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.logout-btn:hover, .login-btn:hover {
+  opacity: 0.9;
+  color: white;
 }

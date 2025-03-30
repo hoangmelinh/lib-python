@@ -51,13 +51,16 @@
           </ul> -->
         </li>
         <li><a href="#">Tin tức & Sự kiện</a></li>
-        <li><a href="#">Liên hệ</a></li>
+        <!-- <li>
+          <a href="{% url 'logout' %}">Đăng Xuất</a>
+        </li>-->
         <li>
-          <a href= {% url 'login' %} >Đăng nhập</a>
-          <!-- <ul class="submenu">
-            <li><a href="#">Email</a></li>
-            <li><a href="#">Các hoạt động</a></li>
-          </ul> -->
+          {% if request.user.is_authenticated %}
+            <a href="#">Hello {{request.user}}</a>
+            <a href="{% url 'logout' %}">Đăng Xuất</a>
+          {% else %}
+            <a href="{% url 'login' %}">Đăng Nhập</a> | <a href="{% url 'register' %}">Đăng Ký</a>
+          {% endif %}
         </li>
       </ul>
     </div>
@@ -65,11 +68,10 @@
     <section class="search-section">
       <select class="pick">
         <option value="all">Tất cả</option>
-      </select>
-      <input class="timkiem" type="text" placeholder="Nhập từ khóa tìm kiếm" />
-      <form action="{% url 'search' %}" method="GET">
-        <button type="submit">Tìm kiếm</button>
-    </form>
+        <form action="{% url 'search' %}" method="GET">
+          <input class="timkiem" type="text" name="q" placeholder="Nhập từ khóa tìm kiếm" required>
+          <button class="search-button" type="submit">Tìm kiếm</button>
+        </form>
     </section>
     <!-- các đầu sách gợi ý -->
     <!-- </div>

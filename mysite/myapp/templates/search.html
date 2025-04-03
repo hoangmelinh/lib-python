@@ -50,19 +50,20 @@
         <li><a href="#">Tin tức & Sự kiện</a></li>
         <li><a href="#">Liên hệ</a></li>
         <li>
-          <a href="#">Đăng Xuất</a>
+          <a href="{% url 'logout' %}">Đăng Xuất</a>
         </li>
       </ul>
     </div>
 
      <!-- Search Bar -->
      <section class="search-section">
-        <select class="pick">
-          <option value="all">Tất cả</option>
-        </select>
-        <input class="timkiem" type="text" placeholder="Nhập từ khóa tìm kiếm" />
-        <button class="search-button" onclick="window.location.href='{% url 'book' %}'">Tìm kiếm</button>
-      </section>
+      <select class="pick">
+        <option value="all">Tất cả</option>
+        <form action="{% url 'search' %}" method="GET">
+          <input class="timkiem" type="text" name="q" placeholder="Nhập từ khóa tìm kiếm" required>
+          <button class="search-button" type="submit">Tìm kiếm</button>
+        </form>
+    </section>
 
     <!-- <div class="main-content">
       <div class="refine-section">

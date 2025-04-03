@@ -27,7 +27,6 @@ class Command(BaseCommand):
                         author=row.get('Author', '').strip(),
                         publisher=row.get('Publisher', '').strip(),
                         uri=row.get('Url', '').strip(),
-                        collection=row.get('Collection', '').strip()
                     )
                     
                     # Xử lý ảnh từ URL

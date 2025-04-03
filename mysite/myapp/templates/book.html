@@ -55,10 +55,10 @@
     </div>
 
     <!-- book information -->
-    <h1>{{ book.title }}</h1>
+    <h1 style ="margin-left: 120px; color : red;">{{ book.title }}</h1>
     <div class="book">
       <div class="document-info">
-       {% if book.collection %}
+       {% if book.title %}
         <div class="info-header">Thông tin tài liệu</div>
         <div class="info-content">
           <div class="image-container">
@@ -69,7 +69,6 @@
           <p><strong>Authors:</strong> {{ book.author }}</p>
           <p><strong>Publisher:</strong> {{ book.publisher }}</p>
           <p><strong>URI:</strong> <a href="{{ book.uri }}">{{ book.uri }}</a></p>
-          <p><strong>Appears in Collections:</strong> {{ book.collection }}</p>
           </div>
         </div>
         {% endif %}

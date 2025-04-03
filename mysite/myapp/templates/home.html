@@ -67,7 +67,11 @@
     <!-- Search Bar -->
     <section class="search-section">
       <select class="pick">
-        <option value="all">Tất cả</option>
+
+    <option value="all">Tất cả</option>
+    <option value="new">Sách</option>
+    <option value="new">Giáo Trình</option> <!-- Thêm option mới -->
+
         <form action="{% url 'search' %}" method="GET">
           <input class="timkiem" type="text" name="q" placeholder="Nhập từ khóa tìm kiếm" required>
           <button class="search-button" type="submit">Tìm kiếm</button>
@@ -160,8 +164,9 @@
             class="post-item-img"
           />
         </div>
+        
       </div>
-
+      
       <section class="author-section">
         <h3 class="filter-header">Hồ sơ tác giả</h3>
         <ul>

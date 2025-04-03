@@ -8,38 +8,51 @@
       
       /* Header */
       .header-top {
-          background-color: #2c3e50;
-          color: white;
-          padding: 8px 20px;
-          display: flex;
-          justify-content: space-between;
-          font-size: 14px;
+        background-color: #b31e1e;
+        color: white;
+        font-size: 17px;
+        display: flex ;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 20px;
       }
       
       .header-top a {
-          color: white;
-          text-decoration: none;
-          margin: 0 5px;
+        color: white;
+        margin-right: 20px;
+        text-decoration: none;
       }
       
       .header-bottom {
-          background-color: white;
-          padding: 15px 20px;
-          box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
+        background-color: white;
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       }
       
+      
       .logo {
-          display: flex;
-          align-items: center;
+        display: flex;
+        align-items: center;
       }
       
       .logo img {
-          height: 60px;
-          margin-right: 15px;
+        height: 70px;
+        margin-right: 5px;
       }
+      
+      .menu {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+      
+      .menu li {
+        position: relative;
+      }
+      
       
       .ten {
           color: #2c3e50;
@@ -70,9 +83,10 @@
       
       /* Search Section */
       .search-section {
-          background-color: #3498db;
-          padding: 30px 0;
-          margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+        background-color: #f2f2f2;
+        padding: 5px;
       }
       
       .search-container {
@@ -90,29 +104,22 @@
       }
       
       .pick {
-          border: none;
-          padding: 12px 20px;
-          background: #f1f1f1;
-          outline: none;
-          width: 150px;
+        display: block;
+        padding: 6px;
       }
       
       .timkiem {
-          flex: 1;
-          border: none;
-          padding: 12px 20px;
-          outline: none;
-          font-size: 16px;
+        flex-grow: 1;
+        padding: 5px;
+        margin: 0 5px;
       }
       
       .search-button {
-          background: #2c3e50;
-          color: white;
-          border: none;
-          padding: 0 25px;
-          cursor: pointer;
-          font-weight: bold;
-          transition: background 0.3s;
+        background-color: red;
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
       }
       
       .search-button:hover {

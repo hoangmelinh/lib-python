@@ -8,11 +8,16 @@ from django.db.models import Q
 
 def register_view(request):
     form = CreateRegister()
-    if request.method == "POST" :
+    if request.method == "POST":
         form = CreateRegister(request.POST)
-        if form.is_valid :
+        if form.is_valid():
             form.save()
-    context = {'form' : form}
+            messages.success(request, "Đăng ký thành công! Vui lòng đăng nhập.")
+            return redirect("login")  # Chuyển hướng đến trang đăng nhập
+        else:
+            messages.error(request, "Đăng ký thất bại. Vui lòng kiểm tra lại thông tin.")
+
+    context = {'form': form}
     return render(request, 'register.html', context)
 
 def home(request):

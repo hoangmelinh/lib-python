@@ -340,3 +340,127 @@ div.desc {
   opacity: 0.9;
   color: white;
 }
+
+/* Điều chỉnh header-top cho mobile */
+@media (max-width: 768px) {
+  .header-top {
+      flex-direction: column;
+      text-align: center;
+      padding: 10px;
+  }
+
+  .header-top a {
+      margin: 5px 0;
+  }
+
+  .header-bottom {
+      flex-direction: column;
+      padding: 10px;
+  }
+
+  .logo img {
+      height: 50px; /* Giảm kích thước logo */
+  }
+}
+
+/* Điều chỉnh menu cho mobile */
+@media (max-width: 768px) {
+  .menu {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+  }
+
+  .submenu {
+      position: static;
+      box-shadow: none;
+      background-color: transparent;
+  }
+
+  .menu li {
+      text-align: center;
+  }
+}
+
+/* Điều chỉnh main layout */
+@media (max-width: 768px) {
+  main {
+      flex-direction: column;
+  }
+
+  .filter-section, .author-section {
+      width: 100%;
+      margin-bottom: 10px;
+  }
+}
+
+/* Điều chỉnh phần bài viết */
+@media (max-width: 768px) {
+  .posts {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .post-item {
+      width: 90%;
+  }
+
+  .post-item img {
+      height: auto; /* Ảnh co giãn theo chiều rộng */
+  }
+}
+
+/* Điều chỉnh slider cho mobile */
+@media (max-width: 768px) {
+  .slider {
+      height: 250px;
+  }
+
+  .slider img {
+      height: 250px;
+  }
+}
+
+/* Điều chỉnh footer */
+@media (max-width: 768px) {
+  .footer {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .footer-content {
+      flex-direction: column;
+      gap: 20px;
+  }
+}
+
+.mobile-menu-button {
+  display: none; /* Ẩn trên laptop */
+  background-color: #b31e1e;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-button {
+      display: block;
+  }
+
+  .menu {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      background-color: white;
+      position: absolute;
+      top: 50px;
+      left: 0;
+      z-index: 1000;
+  }
+
+  .menu.active {
+      display: flex;
+  }
+}

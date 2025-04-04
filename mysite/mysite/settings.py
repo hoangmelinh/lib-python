@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-%a41dsc%0bbtj853)u8=)1jn*i5(kly8jcd09l93$vi*1@vi(f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['nth.io.vn', 'www.hoangmelinh.io.vn', '123.45.67.89','127.0.0.1']
+ALLOWED_HOSTS = ['103.171.90.63', 'nth.io.vn', 'www.hoangmelinh.io.vn', '123.45.67.89','127.0.0.1']
 
 
 # Application definition

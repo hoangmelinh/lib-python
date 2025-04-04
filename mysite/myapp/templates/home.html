@@ -44,7 +44,7 @@
       <ul class="menu">
         <li><a href="#">Trang chủ</a></li>
         <li>
-          <a href="#">Giới thiệu</a>
+          <a href="{% url 'intro' %}">Giới thiệu</a>
           <!-- <ul class="submenu">
             <li><a href="#">Tổng quan</a></li>
             <li><a href="#">Cơ cấu tổ chức</a></li>
@@ -68,14 +68,25 @@
     <section class="search-section">
       <select class="pick">
 
-    <option value="all">Tất cả</option>
-    <option value="new">Sách</option>
-    <option value="new">Giáo Trình</option> <!-- Thêm option mới -->
+      <option value="all">Tất cả</option>
+      <option value="new">Sách</option>
+      <option value="new">Giáo Trình</option> <!-- Thêm option mới -->
+      </select>
 
-        <form action="{% url 'search' %}" method="GET">
+      {% if request.user.is_authenticated %}
+        <form action="{% url 'search' %}" method="GET"
+          style = "display: flex;
+          align-items: center;
+          width: 10000px;">
           <input class="timkiem" type="text" name="q" placeholder="Nhập từ khóa tìm kiếm" required>
           <button class="search-button" type="submit">Tìm kiếm</button>
         </form>
+      {% else %}
+        <input class="timkiem" type="text" name="q" placeholder="Vui lòng đăng nhập để tìm kiếm" required>
+        <button class="search-button" onclick="window.location.href='{% url 'login' %}'">Tìm kiếm</button>
+        
+      {% endif %}
+        
     </section>
     <!-- các đầu sách gợi ý -->
     <!-- </div>

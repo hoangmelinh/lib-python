@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Book
+from .models import Book, Giaotrinh
 from django.contrib.auth.forms import UserCreationForm
 from myapp.models import CreateRegister
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.db.models import Q 
+from django.contrib.auth.decorators import login_required
 
 def register_view(request):
     form = CreateRegister()
@@ -23,15 +24,33 @@ def register_view(request):
 def home(request):
     return render(request, 'home.html')
 
+def intro_ptit(request):
+    return render(request, 'intro.html')
+
+@login_required(login_url='/login/')
 def search_page(request):
     query = request.GET.get('q', '')
-    if query:
-        books = Book.objects.filter(Q(title__icontains=query) | Q(author__icontains=query))
-        if books.count() == 1:
-            return redirect('book_detail', book_id=books.first().id)
-        return render(request, 'search.html', {'books': books, 'query': query})
-    return redirect('home')
+    category = request.GET.get('category', 'all')  # Lấy giá trị từ select box
 
+    if query:
+        if category == "book":
+            books = Book.objects.filter(Q(title__icontains=query) | Q(author__icontains=query))
+            if books.count() == 1:
+                return redirect('book_detail', book_id=books.first().id)
+            return render(request, 'search.html', {'books': books, 'query': query})
+
+        elif category == "giaotrinh":
+            giaotrinh = Giaotrinh.objects.filter(Q(title__icontains=query) | Q(author__icontains=query))
+            if giaotrinh.count() == 1:
+                return redirect('giaotrinh_detail', giaotrinh_id=giaotrinh.first().id)
+            return render(request, 'search_gtrinh.html', {'giaotrinh': giaotrinh, 'query': query})
+
+        else:  # category == "all"
+            books = Book.objects.filter(Q(title__icontains=query) | Q(author__icontains=query))
+            giaotrinh = Giaotrinh.objects.filter(Q(title__icontains=query) | Q(author__icontains=query))
+            return render(request, 'search.html', {'books': books, 'giaotrinh': giaotrinh, 'query': query})
+
+    return redirect('home')
 
 
 def book_list(request):
@@ -73,3 +92,13 @@ def logout_view(request):
 def book_detail(request, book_id):
     book = get_object_or_404(Book, id=book_id)
     return render(request, 'book.html', {'book': book})
+
+def search_page1(request):
+    query = request.GET.get('q', '')
+    if query:
+        giaotrinhs = Giaotrinh.objects.filter(Q(title__icontains=query) | Q(author__icontains=query))
+        if giaotrinhs.count() == 1:
+            return redirect('book_detail', book_id=books.first().id)
+        return render(request, 'search_gtrinh.html', {'giaotrinhs': giaotrinhs, 'query': query})
+    return redirect('home')
+

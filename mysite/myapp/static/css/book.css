@@ -193,3 +193,47 @@ li {
 .details a:hover {
   text-decoration: underline;
 }
+
+@media (max-width: 768px) {
+  main {
+      flex-direction: column;
+  }
+
+  .filter-section, .author-section {
+      width: 100%;
+      margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-top {
+      flex-direction: column;
+      text-align: center;
+      padding: 10px;
+  }
+
+  .header-top a {
+      margin: 5px 0;
+  }
+
+  .header-bottom {
+      flex-direction: column;
+      padding: 10px;
+  }
+
+  .logo img {
+      height: 50px; /* Giảm kích thước logo */
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .footer-content {
+      flex-direction: column;
+      gap: 20px;
+  }
+}

@@ -69,30 +69,23 @@
     </div>
     <!-- Search Bar -->
     <section class="search-section">
-      <select class="pick">
-      <option value="all">Tất cả</option>
-      <option value="new">Sách</option>
-      <option value="new">Giáo Trình</option> 
-      <option value="all">Năm Xuất Bản</option>
-      <option value="new">Tác Giả</option>
-      <option value="new">Nhan Đề</option>
+  {% if request.user.is_authenticated %}
+    <form action="{% url 'search' %}" method="GET" style="display: flex; align-items: center; width: 100%;">
+      
+      <select class="pick" name="category" style="margin-right: 10px;">
+        <option value="all" {% if category == 'all' %}selected{% endif %}>Tất cả</option>
+        <option value="book" {% if category == 'book' %}selected{% endif %}>Sách</option>
+        <option value="giaotrinh" {% if category == 'giaotrinh' %}selected{% endif %}>Giáo Trình</option>
       </select>
 
-      {% if request.user.is_authenticated %}
-        <form action="{% url 'search' %}" method="GET"
-          style = "display: flex;
-          align-items: center;
-          width: 10000px;">
-          <input class="timkiem" type="text" name="q" placeholder="Nhập từ khóa tìm kiếm" required>
-          <button class="search-button" type="submit">Tìm kiếm</button>
-        </form>
-      {% else %}
-        <input class="timkiem" type="text" name="q" placeholder="Vui lòng đăng nhập để tìm kiếm" required>
-        <button class="search-button" onclick="window.location.href='{% url 'login' %}'">Tìm kiếm</button>
-        
-      {% endif %}
-        
-    </section>
+      <input class="timkiem" type="text" name="q" value="{{ query }}" placeholder="Nhập từ khóa tìm kiếm" required>
+      <button class="search-button" type="submit">Tìm kiếm</button>
+    </form>
+  {% else %}
+    <input class="timkiem" type="text" name="q" placeholder="Vui lòng đăng nhập để tìm kiếm" required>
+    <button class="search-button" onclick="window.location.href='{% url 'login' %}'">Tìm kiếm</button>
+  {% endif %}
+</section>
   </header>
   <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
   <main>
@@ -103,13 +96,13 @@
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="https://ptit.edu.vn/wp-content/uploads/2025/03/1958x745-1.png" class="d-block w-100" alt="..." style= "height : 350px";>
+      <img src="https://ptit.edu.vn/wp-content/uploads/2025/03/1958x745-1.png" class="d-block w-100" alt="..." style= "height : 380px";>
     </div>
     <div class="carousel-item">
-      <img src= "{% static 'images/ChatGPT Image 20_42_47 5 thg 4, 2025.png'%}" class="d-block w-100" alt="..." style= "height : 350px";>
+      <img src= "https://scontent.fhan15-1.fna.fbcdn.net/v/t39.30808-6/489921886_675570775124320_91705074333048511_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHvsr7FTjxjMPVs9FLpKpotvVqmPiekT4S9WqY-J6RPhFY5UCwKRg0AhIudntfDHfnsgiEuMhaWxcpCVKB2K9Y4&_nc_ohc=j10gCzySA7YQ7kNvwHsVN0E&_nc_oc=Adn6FrVI1jNqbDc3-3XDFwE4AxGCQWqVU_-JbxWvLJcaxLSNC9CeGiKMPH5svTDK7dePH122XYicdh6kemt31uTW&_nc_zt=23&_nc_ht=scontent.fhan15-1.fna&_nc_gid=99K2sIzkG0j14GWrwH_heg&oh=00_AfEjDPeRbBdQaXoZcxAnizwipObbuwsMxfD-O4HkxBkJcw&oe=6806E455" class="d-block w-100" alt="..." style= "height : 380px";>
     </div>
     <div class="carousel-item">
-      <img src="{% static 'images/Ảnh bìa Facebook Trích dẫn Ảnh Sách Văn học Thư viện Nâu và Màu be.png'%}" class="d-block w-100" alt="..." style= "height : 350px";>
+      <img src="https://images.pexels.com/photos/2041540/pexels-photo-2041540.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="d-block w-100" alt="..." style= "height : 380px";>
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -196,6 +189,268 @@
             </div>
         </div>
     </section>
+
+  <!-- Sách yêu thích section -->
+  <section class="favorite-books-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>SÁCH YÊU THÍCH</h2>
+      </div>
+      
+      <!-- Row 1 -->
+      <div class="row book-row">
+        <!-- Book 1 -->
+        <div class="col-md-3 col-sm-6 mb-4">
+          <div class="book-item">
+            <div class="book-cover">
+              <img src="https://m.media-amazon.com/images/I/71dNsRuYL7L._AC_UF1000,1000_QL80_.jpg" alt="Book cover">
+              <div class="book-overlay">
+                <a href="#" class="btn-view">Xem chi tiết</a>
+              </div>
+            </div>
+            <div class="book-info">
+              <h3>Clean Code</h3>
+              <p class="author">Robert C. Martin</p>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-half"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Book 2 -->
+        <div class="col-md-3 col-sm-6 mb-4">
+          <div class="book-item">
+            <div class="book-cover">
+              <img src="https://m.media-amazon.com/images/I/51L7aRvbU-L._SY445_SX342_.jpg" alt="Book cover">
+              <div class="book-overlay">
+                <a href="#" class="btn-view">Xem chi tiết</a>
+              </div>
+            </div>
+            <div class="book-info">
+              <h3>Design Patterns</h3>
+              <p class="author">Erich Gamma</p>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Book 3 -->
+        <div class="col-md-3 col-sm-6 mb-4">
+          <div class="book-item">
+            <div class="book-cover">
+              <img src="https://m.media-amazon.com/images/I/41xShlnTZTL._SY445_SX342_.jpg" alt="Book cover">
+              <div class="book-overlay">
+                <a href="#" class="btn-view">Xem chi tiết</a>
+              </div>
+            </div>
+            <div class="book-info">
+              <h3>The Pragmatic Programmer</h3>
+              <p class="author">Andrew Hunt</p>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Book 4 -->
+        <div class="col-md-3 col-sm-6 mb-4">
+          <div class="book-item">
+            <div class="book-cover">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSw7SPHVWO12rEqIjbiq_79lGBH33c_3sHesYMw8nG_oylv6zAi" alt="Book cover">
+              <div class="book-overlay">
+                <a href="#" class="btn-view">Xem chi tiết</a>
+              </div>
+            </div>
+            <div class="book-info">
+              <h3>Python Crash Course</h3>
+              <p class="author">Eric Matthes</p>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-half"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Row 2 -->
+      <div class="row book-row">
+        <!-- Book 5 -->
+        <div class="col-md-3 col-sm-6 mb-4">
+          <div class="book-item">
+            <div class="book-cover">
+              <img src="https://m.media-amazon.com/images/I/61oRH4y27jL._SY445_SX342_.jpg" alt="Book cover">
+              <div class="book-overlay">
+                <a href="#" class="btn-view">Xem chi tiết</a>
+              </div>
+            </div>
+            <div class="book-info">
+              <h3>Python for Data Analysis</h3>
+              <p class="author">Wes McKinney</p>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Book 6 -->
+        <div class="col-md-3 col-sm-6 mb-4">
+          <div class="book-item">
+            <div class="book-cover">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIwyxXAAXkITO3UOPLOTtAO6MMxKubHrp0gJ0vxqXBmtiiGyed" alt="Book cover">
+              <div class="book-overlay">
+                <a href="#" class="btn-view">Xem chi tiết</a>
+              </div>
+            </div>
+            <div class="book-info">
+              <h3>Deep Learning</h3>
+              <p class="author">Ian Goodfellow</p>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-half"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Book 7 -->
+        <div class="col-md-3 col-sm-6 mb-4">
+          <div class="book-item">
+            <div class="book-cover">
+              <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRHVZsHf7ZPHPZ51B8dblEMlNvq3fWCz9RdVF1I2DcOfLiUMRr_" alt="Book cover">
+              <div class="book-overlay">
+                <a href="#" class="btn-view">Xem chi tiết</a>
+              </div>
+            </div>
+            <div class="book-info">
+              <h3>Hands-On Machine Learning</h3>
+              <p class="author">Aurélien Géron</p>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Book 8 -->
+        <div class="col-md-3 col-sm-6 mb-4">
+          <div class="book-item">
+            <div class="book-cover">
+              <img src="https://m.media-amazon.com/images/I/51Kwaw5nInL._SX342_SY445_.jpg" alt="Book cover">
+              <div class="book-overlay">
+                <a href="#" class="btn-view">Xem chi tiết</a>
+              </div>
+            </div>
+            <div class="book-info">
+              <h3>JavaScript: The Good Parts</h3>
+              <p class="author">Douglas Crockford</p>
+              <div class="rating">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- View More Button -->
+      <div class="text-center mt-4">
+        <a href="#" class="btn-more">Xem thêm sách</a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Recommended Books Section - only shows if data exists -->
+  {% if recommended_books %}
+  <section class="recommended-books-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>SÁCH BẠN CÓ THỂ THÍCH</h2>
+      </div>
+      
+      <div class="book-slider-container">
+        <button class="slider-nav-btn prev-btn">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+        
+        <div class="book-slider">
+          {% for book in recommended_books %}
+          <div class="book-item">
+            <div class="book-cover">
+              {% if book.image %}
+                  <img src="{{ book.image.url }}" alt="Bìa sách {{ book.title }}">
+              {% else %}
+                  <img src="{% static 'images/placeholder.png' %}" alt="Không có ảnh bìa">
+              {% endif %}
+              <div class="book-overlay">
+                <a href="{% url 'book_detail' book.id %}" class="btn-view">Xem chi tiết</a>
+              </div>
+            </div>
+            <div class="book-info">
+              <h3>{{ book.title }}</h3>
+              <p class="author">{{ book.author }}</p>
+              <div class="rating">
+                {% for i in "12345" %}
+                  {% if i|add:"0" <= book.rating|add:"0" %}
+                    <i class="bi bi-star-fill"></i>
+                  {% elif i|add:"0" <= book.rating|add:"0.5" %}
+                    <i class="bi bi-star-half"></i>
+                  {% else %}
+                    <i class="bi bi-star"></i>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        
+        <button class="slider-nav-btn next-btn">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+      
+      <div class="slider-dots">
+        <!-- Dots will be populated by JavaScript -->
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
   <section class="news-section">
     <div class="news-header">
       <h2>Tin tức - Sự kiện</h2>
@@ -227,6 +482,7 @@
       </div>
     </div>
   </section>
+  
   </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
@@ -281,4 +537,120 @@
       </div>
     </div>
   </footer>
+  
+  <!-- Add JavaScript for Book Slider -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize book slider functionality if it exists
+      const sliders = document.querySelectorAll('.book-slider');
+      
+      sliders.forEach(slider => {
+        const container = slider.closest('.book-slider-container');
+        if (!container) return;
+        
+        const prevBtn = container.querySelector('.prev-btn');
+        const nextBtn = container.querySelector('.next-btn');
+        const dotsContainer = container.parentElement.querySelector('.slider-dots');
+        
+        // Skip if elements not found
+        if (!prevBtn || !nextBtn || !dotsContainer) return;
+        
+        // Calculate dimensions
+        const bookWidth = slider.querySelector('.book-item').offsetWidth + 20; // width + gap
+        const visibleWidth = slider.offsetWidth;
+        const itemsPerPage = Math.floor(visibleWidth / bookWidth);
+        const totalItems = slider.querySelectorAll('.book-item').length;
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+        
+        // Create dots
+        for (let i = 0; i < totalPages; i++) {
+          const dot = document.createElement('span');
+          dot.classList.add('dot');
+          if (i === 0) dot.classList.add('active');
+          dot.dataset.index = i;
+          dotsContainer.appendChild(dot);
+          
+          dot.addEventListener('click', () => {
+            currentPage = i;
+            updateSlider();
+          });
+        }
+        
+        let currentPage = 0;
+        
+        // Update slider to current page
+        function updateSlider() {
+          const scrollPosition = currentPage * visibleWidth;
+          slider.scrollLeft = scrollPosition;
+          
+          // Update dots
+          dotsContainer.querySelectorAll('.dot').forEach((dot, index) => {
+            if (index === currentPage) {
+              dot.classList.add('active');
+            } else {
+              dot.classList.remove('active');
+            }
+          });
+          
+          // Update button states
+          prevBtn.disabled = currentPage === 0;
+          prevBtn.style.opacity = currentPage === 0 ? '0.5' : '1';
+          
+          nextBtn.disabled = currentPage === totalPages - 1;
+          nextBtn.style.opacity = currentPage === totalPages - 1 ? '0.5' : '1';
+        }
+        
+        // Initial setup
+        updateSlider();
+        
+        // Button event listeners
+        prevBtn.addEventListener('click', () => {
+          if (currentPage > 0) {
+            currentPage--;
+            updateSlider();
+          }
+        });
+        
+        nextBtn.addEventListener('click', () => {
+          if (currentPage < totalPages - 1) {
+            currentPage++;
+            updateSlider();
+          }
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+          // Recalculate dimensions
+          const newBookWidth = slider.querySelector('.book-item').offsetWidth + 20;
+          const newVisibleWidth = slider.offsetWidth;
+          const newItemsPerPage = Math.floor(newVisibleWidth / newBookWidth);
+          const newTotalPages = Math.ceil(totalItems / newItemsPerPage);
+          
+          // Reset dots
+          dotsContainer.innerHTML = '';
+          for (let i = 0; i < newTotalPages; i++) {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            if (i === currentPage) dot.classList.add('active');
+            dot.dataset.index = i;
+            dotsContainer.appendChild(dot);
+            
+            dot.addEventListener('click', () => {
+              currentPage = i;
+              updateSlider();
+            });
+          }
+          
+          // Ensure current page is valid
+          if (currentPage >= newTotalPages) {
+            currentPage = newTotalPages - 1;
+          }
+          
+          // Update slider
+          updateSlider();
+        });
+      });
+    });
+  </script>
+</html>
 </html>

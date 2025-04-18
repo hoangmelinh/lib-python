@@ -13,4 +13,6 @@ urlpatterns = [
     path('intro/', views.intro_ptit, name='intro'),
     path('home/', views.home, name='home'),
     path('search_gtrinh/', views.search_page1, name='searchgtrinh'),
+    path('giaotrinh/<int:giaotrinh_id>/', views.giaotrinh_detail, name='giaotrinh_detail'),
+
 ] 

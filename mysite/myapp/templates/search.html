@@ -81,12 +81,13 @@
       </div> -->
 
        <div class="search-results">
-        {% if query %}
-            <h4>Kết quả tìm kiếm cho "{{ query }}"</h4>
-            
+          <h4>Kết quả tìm kiếm cho "{{ query }}"</h4>
+
+          {% if category == "book" or category == "" %}
             {% if books %}
-                <div class="result-list">
-                    {% for book in books %}
+              <h5>Sách</h5>
+              <div class="result-list">
+                {% for book in books %}
                     <div class="result-item">
                         {% if book.image %}
                             <img src="{{ book.image.url }}" alt="Bìa sách {{ book.title }}">
@@ -103,13 +104,38 @@
                         </div>
                     </div>
                     {% endfor %}
-                </div>
+              </div>
             {% else %}
-                <p>Không tìm thấy sách phù hợp</p>
+              {% if category == "book" or category == "" %}
+                <p>Không tìm thấy sách phù hợp.</p>
+              {% endif %}
             {% endif %}
-        {% else %}
-            <p>Vui lòng nhập từ khóa tìm kiếm</p>
-        {% endif %}
+          {% endif %}
+
+          {% if category == "giaotrinh" or category == "" %}
+            {% if giaotrinhs %}
+              <h5>Giáo trình</h5>
+              <div class="result-list">
+                {% for giaotrinh in giaotrinhs %}
+                   <div class="result-item">
+                    {% if giaotrinh.image %}
+                      <img src="{{ giaotrinh.image.url }}" alt="{{ giaotrinh.title }}">
+                    {% else %}
+                      <img src="{% static 'images/default-book.jpg' %}" alt="No image available">
+                    {% endif %}
+                    <div class="result-info">
+                      <h4><a href="{% url 'giaotrinh_detail' giaotrinh.id %}">{{ giaotrinh.title }}</a></h4>
+                      <p><strong>Tác giả:</strong> {{ giaotrinh.author }}</p>
+                    </div>
+                    </div>
+                {% endfor %}
+              </div>
+              {% else %}
+              {% if category == "giaotrinh" or category == "" %}
+                <p>Không tìm thấy giáo trình phù hợp.</p>
+              {% endif %}
+            {% endif %}
+          {% endif %}
     </div>
 
  <!-- Footer -->

@@ -237,3 +237,43 @@ li {
       gap: 20px;
   }
 }
+.image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 40px;
+}
+
+.image-container img {
+  width: 200px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.button-wrapper {
+  margin-top: 15px;
+}
+
+.btn-view {
+  padding: 10px 18px;
+  background-color: #b71515;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+
+.btn-view:hover {
+  background-color: #991e1e;
+  transform: scale(1.05);
+  box-shadow: 0 4px 14px rgba(107, 27, 27, 0.2);
+}
+
+.btn-view.disabled,
+.btn-view:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

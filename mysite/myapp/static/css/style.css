@@ -13,7 +13,7 @@ li {
   display: flex ;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 20px;
+  padding: 5px 5px;
 }
 
 .header-top a {
@@ -24,7 +24,7 @@ li {
 
 .header-bottom {
   background-color: white;
-  padding: 10px 20px;
+  padding: 3px 8px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -38,14 +38,15 @@ li {
 }
 
 .logo img {
-  height: 70px;
+  height: 60px;
   margin-right: 5px;
 }
 
 .menu {
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .menu li {
@@ -55,7 +56,7 @@ li {
 .menu a {
   color: #1e1e1e;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 500;
 }
 
@@ -78,7 +79,7 @@ li {
 }
 .ten {
   color: #b31e1e;
-  font-size: 18px;
+  font-size: 15px;
 }
 
 
@@ -248,7 +249,7 @@ div.desc {
 }
 
 .login-btn {
-  background: #0d6efd;
+  background: #fd0d0d;
   color: white;
   padding: 5px 10px;
   border-radius: 4px;
@@ -280,6 +281,58 @@ div.desc {
   .logo img {
       height: 50px; /* Giảm kích thước logo */
   }
+}
+
+
+.auth-links {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  margin-left: 30px;
+  padding-top: 15px;
+}
+
+.welcome-text {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.login-btn, .register-btn, .logout-btn {
+  padding: 8px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: red;
+  font-size: 14px;
+}
+
+.login-btn {
+  background: red;
+}
+
+.login-btn:hover {
+  background-color:  #8b1515;
+  transform: translateY(-2px);
+}
+
+.register-btn {
+  background-color: transparent;
+  color: var(--primary-color);
+}
+
+.register-btn:hover {
+  background-color:  #8b1515;
+  transform: translateY(-2px);
+}
+
+.logout-btn {
+  background-color: #b31e1e;
+}
+
+.logout-btn:hover {
+  background-color:  #8b1515;
+  transform: translateY(-2px);
 }
 
 /* Điều chỉnh menu cho mobile */
@@ -488,7 +541,7 @@ body {
 
 /* Để tránh nội dung bị che bởi header, thêm padding vào phần main */
 main {
-  padding-top: 60px; /* = chiều cao của header */
+  padding-top: 20px; /* = chiều cao của header */
 }
 
 :root {
@@ -1155,4 +1208,345 @@ body {
   .book-cover {
     height: 180px;
   }
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #c00;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(180, 0, 0, 0.3);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background-color: #a00;
+  box-shadow: 0 6px 16px rgba(180, 0, 0, 0.4);
+  transform: translateY(-3px);
+}
+
+.back-to-top:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 8px rgba(180, 0, 0, 0.3);
+}
+
+/* Pulse animation */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(204, 0, 0, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(204, 0, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(204, 0, 0, 0);
+  }
+}
+
+.back-to-top.visible {
+  animation: pulse 2s infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .back-to-top {
+    width: 45px;
+    height: 45px;
+    bottom: 20px;
+    right: 20px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .back-to-top {
+    width: 40px;
+    height: 40px;
+    bottom: 15px;
+    right: 15px;
+    font-size: 18px;
+  }
+}
+#back-to-top {
+  transition: opacity 0.3s, visibility 0.3s;
+  opacity: 0;
+  visibility: hidden;
+}
+#back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+.recommended-books {
+  padding: 60px 0;
+  background-color: var(--background-color);
+}
+
+.section-title {
+  color: var(--primary-color);
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title:after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  background: var(--gradient);
+  border-radius: 2px;
+}
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  padding: 0 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.book-item {
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.book-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.book-cover {
+  height: 350px;
+  overflow: hidden;
+  position: relative;
+}
+
+.book-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.book-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(179, 30, 30, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.book-item:hover .book-overlay {
+  opacity: 1;
+}
+
+.book-item:hover .book-cover img {
+  transform: scale(1.05);
+}
+
+.btn-view {
+  padding: 12px 24px;
+  background: transparent;
+  color: whitesmoke;
+  border-radius: 4px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+  border: 1px solid var(--white);
+}
+
+.btn-view:hover {
+  background: gray;
+  color: var(--white);
+}
+
+.book-info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.book-info h3 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  color: var(--text-color);
+  min-height: 50px;
+}
+
+.book-info .author {
+  color: var(--light-text);
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+.book-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  padding: 0 20px 20px;
+}
+
+.book-actions form {
+  width: 100%;
+}
+
+.btn-borrow {
+  width: 100%;
+  padding: 15px 25px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--primary-color);
+  color: var(--white);
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+
+.btn-borrow:hover:not(.disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(179, 30, 30, 0.3);
+  background: var(--secondary-color);
+}
+
+.btn-borrow.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: var(--light-text);
+  color: var(--white);
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-borrow i {
+  font-size: 20px;
+}
+/* Thêm phần CSS này vào */
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.menu li {
+  position: relative;
+}
+
+.menu li a {
+  color: #333;
+  text-decoration: none;
+  padding: 10px 15px;
+  display: block;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  position: relative;
+}
+
+/* Hiệu ứng hover */
+.menu li a:hover {
+  color: #d32f2f; /* Màu đỏ khi hover */
+}
+
+.menu li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: #d32f2f;
+  bottom: 0;
+  left: 0;
+  transition: width 0.3s ease;
+}
+
+.menu li a:hover::after {
+  width: 100%;
+}
+
+/* Style cho phần user và đăng xuất */
+.auth-links {
+  margin-left: auto;
+}
+
+.logout-btn, .login-btn, .register-btn {
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.logout-btn {
+  background-color: #d32f2f;
+  color: white;
+}
+
+.logout-btn:hover {
+  background-color: #b71c1c;
+}
+
+.login-btn {
+  background-color:  #d32f2f;
+  margin-right: 10px;
+}
+
+.register-btn {
+  background-color: #d32f2f;
+  color: white;
+  padding-left: 17px;
+  padding-right: 17px;
+}
+
+.register-btn:hover {
+  background-color: #b71c1c;
+}
+
+/* Icon user */
+.fas.fa-user {
+  color: #d32f2f;
 }

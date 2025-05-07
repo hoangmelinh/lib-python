@@ -149,12 +149,20 @@ def logout_view(request):
     logout(request)
     return redirect('login')
 
+
+
 @login_required
 def profile_view(request):
-    borrowed_books = BorrowRecord.objects.filter(user=request.user)
-    return render(request, 'user\profile.html', {
+    user = request.user
+    borrowed_books = BorrowRecord.objects.filter(user=user)
+    returned_books = borrowed_books.exclude(returned_at=None)
+    viewed_books = UserHistory.objects.filter(user=user).select_related('book').order_by('-viewed_at')
+
+    return render(request, 'user/profile.html', {
+        'user': user,
         'borrowed_books': borrowed_books,
-        'user': request.user,
+        'returned_books': returned_books,
+        'viewed_books': viewed_books,
     })
 
 @login_required

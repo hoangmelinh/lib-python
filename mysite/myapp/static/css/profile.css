@@ -553,4 +553,41 @@
       width: 100%; /* 1 cột khi mobile */
   }
 }
-          
+
+.book-slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 16px;
+  padding: 10px 0;
+}
+
+.book-card {
+  flex: 0 0 auto;
+  width: 220px; /* Chiều rộng cố định cho mỗi cuốn sách */
+}
+
+.book-carousel-wrapper {
+  position: relative;
+}
+
+.slide-btn {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  background-color: rgba(255,255,255,0.8);
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 10;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.slide-btn.left {
+  left: 0;
+}
+
+.slide-btn.right {
+  right: 0;
+}

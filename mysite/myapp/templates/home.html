@@ -54,31 +54,30 @@
           <a href="{% url 'intro' %}">Giới thiệu</a>
         </li>
         <li><a href="https://ptit.edu.vn/tin-tuc-su-kien/tin-tuc/tin-tuc-chung">Tin tức & Sự kiện</a></li>
-        <li>
-          <a href="{% url 'borrowed_books'%}">
-            {% if request.user.is_authenticated %}
-                  <span>Danh Sách Đã Mượn</span>
-            {% endif %}
-          </a>
-        </li>
-        <li>
-        <a href="{% url 'profile' %}" style = "padding: 0 0;">
-          {% if request.user.is_authenticated %}
-            <i class="fas fa-user" style="margin-right: 5px;"></i>
-            <span>{{ request.user }}</span>
-          {% endif %}
-        </a>
-      </li>
       </ul>
-    <ul style = "display: flex; gap: 0px"> 
-      <li class="auth-links">
-            {% if request.user.is_authenticated %}
-              <a href="{% url 'logout' %}" class="logout-btn">Đăng Xuất</a>
-            {% else %}
-              <a href="{% url 'login' %}" class="login-btn">Đăng Nhập</a>
-              <a href="{% url 'register' %}" class="register-btn">Đăng Ký</a>
-            {% endif %}
-        </li>
+      <ul class="auth-menu">
+        {% if request.user.is_authenticated %}
+          <li class="user-menu">
+            <div class="dropdown">
+              <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-user"></i>
+                <span>{{ request.user }}</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'profile' %}"><i class="fas fa-user-circle"></i> Thông tin cá nhân</a></li>
+                <li><a class="dropdown-item" href="{% url 'borrowed_books' %}"><i class="fas fa-book"></i> Sách đã mượn</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
+              </ul>
+            </div>
+          </li>
+        {% else %}
+          <li class="auth-links">
+            <a href="{% url 'login' %}" class="login-btn">Đăng Nhập</a>
+            <a href="{% url 'register' %}" class="register-btn">Đăng Ký</a>
+          </li>
+        {% endif %}
+      </ul>
     </div>
   </ul>
   <!-- Search Bar -->
@@ -595,3 +594,5 @@
     </div>
   </div>
 </div>
+
+

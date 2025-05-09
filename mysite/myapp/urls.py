@@ -19,6 +19,7 @@ urlpatterns = [
     path('return/<int:borrow_id>/', views.return_book, name='return_book'),
     path('profile/', views.profile_view, name='profile'),
     path('profile/edit/', views.edit_profile, name='edit_profile'),
+    path('prof/', views.profile_view, name='profile'),
 
 
 ] 

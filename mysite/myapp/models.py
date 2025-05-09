@@ -21,14 +21,14 @@ class Giaotrinh(models.Model):
     image = models.ImageField(upload_to='book_images/', null=True, blank=True)  
     def __str__(self):
         return self.title
-#change form register
+
 
 class CreateRegister(UserCreationForm):
     full_name = forms.CharField(max_length=100, required=True, label="Họ và Tên")
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']  # KHÔNG thêm full_name ở đây
+        fields = ['username', 'email', 'password1', 'password2']  
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -50,12 +50,12 @@ class BorrowRecord(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     borrowed_at = models.DateTimeField(auto_now_add=True)
-    returned_at = models.DateTimeField(null=True, blank=True)  # Thời gian trả sách
+    returned_at = models.DateTimeField(null=True, blank=True)  
 
     def __str__(self):
         return f"{self.user.username} - {self.book.title}"
 
     def is_borrowed(self):
-        # Kiểm tra nếu sách chưa được trả thì sách đang mượn
+   
         return self.returned_at is None
     

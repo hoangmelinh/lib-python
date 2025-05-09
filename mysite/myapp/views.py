@@ -88,10 +88,10 @@ def search_page(request):
         elif category == 'giaotrinh':
             giaotrinhs = Giaotrinh.objects.filter(Q(title__icontains=query))
         elif category == 'all':
-            books = Book.objects.filter(Q(title__icontains=query) | Q(author__icontains=query))
-            giaotrinhs = Giaotrinh.objects.filter(Q(title__icontains=query) | Q(author__icontains=query))
+            books = Book.objects.filter(Q(title__icontains=query) & Q(author__icontains=query))
+            giaotrinhs = Giaotrinh.objects.filter(Q(title__icontains=query) and Q(author__icontains=query))
 
-    # Recommend nên xử lý riêng nếu user đã login
+
     if user.is_authenticated:
         history = UserHistory.objects.filter(user=user).values_list('book_id', flat=True)
         books_df = pd.DataFrame(list(Book.objects.values('id', 'title', 'author')))
@@ -182,6 +182,11 @@ def book_detail(request, book_id):
     book = get_object_or_404(Book, id=book_id)
     return render(request, 'book.html', {'book': book})
 
+def giaotrinh_detail(request, giaotrinh_id):
+    giaotrinh = get_object_or_404(Giaotrinh, id=giaotrinh_id)
+    return render(request, 'giaotrinh.html', {'giaotrinh': giaotrinh})
+
+
 
 def recommended_books(request):
     user = request.user
@@ -193,11 +198,6 @@ def recommended_books(request):
 
     recommendations = recommend_books(user.id, books_df, history_dict)
     return render(request, 'home.html', {'home': home})
-
-def giaotrinh_detail(request, giaotrinh_id):
-    giaotrinh = get_object_or_404(Giaotrinh, id=giaotrinh_id)
-    return render(request, 'giaotrinh_detail.html', {'giaotrinh': giaotrinh})
-
 
 def preprocess_image(image):
 
@@ -334,7 +334,6 @@ def return_book(request, borrow_id):
         borrow_record.returned_at = timezone.now()
         borrow_record.save()
 
-        # Tăng lại số lượng sách
         book = borrow_record.book
         book.quantity += 1
         book.save()
